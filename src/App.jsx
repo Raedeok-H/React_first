@@ -1,33 +1,30 @@
 import {useState} from 'react'
 import './App.css'
-import HelloWorld from "./components/HelloWorld.jsx";
 
 function App() {
-    // State 설정: count라는 변수를 만들고, setCount라는 함수를 통해 count의 값을 변경할 수 있도록 함
-    const [count, setCount] = useState(0)
+    // 입력 값을 저장할 상태
+    const [inputValue, setInputValue] = useState('');
 
-    // 숫자를 증가시키는 함수
-    const increaseCount = () => {
-        setCount(count + 1);// state를 변경하면 화면이 자동으로 업데이트 됨
-    };
-
-    // 숫자 감소 함수
-    const decreaseCount = () => {
-        setCount(count - 1);
-    };
-
-    // 숫자 초기화 함수
-    const resetCount = () => {
-        setCount(0);
-    };
+    // 입력 값이 변경될 때 호출되는 함수
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value); // 입력된 값을 상태에 반영
+    }
 
     return (
         <div style={{textAlign: 'center', marginTop: '50px'}}>
-            <h1>React 학습: State를 사용한 카운터</h1>
-            <h2>Count: {count}</h2>
-            <button onClick={decreaseCount}> -1 감소</button>
-            <button onClick={resetCount} style={{margin: '0 10px'}}>초기화</button>
-            <button onClick={increaseCount}> +1 증가</button>
+            <h1>React 학습: 입력 필드 실시간 반영</h1>
+
+            {/* 입력 필드 */}
+            <input
+                type="text"
+                placeholder="텍스트를 입력하세요"
+                value={inputValue} // 상태 값과 입력 필드를 연결
+                onChange={handleInputChange} // 입력 값이 변경될 때 호출
+                style={{padding: '8px', fontSize: '16px'}}
+            />
+
+            {/* 입력된 값을 화명에 표시 */}
+            <h2>입력된 값: {inputValue}</h2>
         </div>
     )
 }
